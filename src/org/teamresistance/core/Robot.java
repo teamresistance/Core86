@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 
 public class Robot extends IterativeRobot {
 
-	protected static String LOG_FILE_PATH = "D:\\Users\\jaxfr\\Desktop\\";
+	protected static String LOG_FILE_PATH = "/home/lvuser/logs/";
 	protected static Logger logger = Logger.getLogger(Robot.class.getName());
 	static {
 		initLogger();
