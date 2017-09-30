@@ -4,6 +4,12 @@ import org.teamresistance.core.io.NavX;
 
 import edu.wpi.first.wpilibj.RobotDrive;
 
+/**
+ * Class to handle various forms of mecanum drive.
+ * 
+ * @author Frank McCoy
+ *
+ */
 public class MecanumDrive {
 	private RobotDrive drive;
 	private NavX gyro;

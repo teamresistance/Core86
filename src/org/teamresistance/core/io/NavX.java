@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.SPI;
 
 public class NavX {
 	
-	public AHRS ahrs = new AHRS(SPI.Port.kMXP);
+	private AHRS ahrs = new AHRS(SPI.Port.kMXP);
 	
 	public double getNormalizedAngle() {
 		return ((ahrs.getAngle() % 360) + 360) % 360;

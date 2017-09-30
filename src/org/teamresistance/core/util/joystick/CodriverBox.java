@@ -3,8 +3,11 @@ package org.teamresistance.core.util.joystick;
 import edu.wpi.first.wpilibj.Joystick;
 
 /**
+ * Class which handled our custom HID during the 2015 FIRST game "Recycle Rush."
+ * 
  * @author Frank McCoy
  */
+@Deprecated
 public class CodriverBox {
 
   private Joystick input;

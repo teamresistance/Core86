@@ -4,6 +4,12 @@ import org.teamresistance.core.configuration.Configurable;
 import org.teamresistance.core.mathi.Vector2i;
 import org.teamresistance.core.mathi.Vector3i;
 
+/**
+ * Representation of three dimensional Vector
+ * 
+ * @author Frank McCoy
+ *
+ */
 @Configurable
 public class Vector3d {
 	@Configurable
@@ -13,6 +19,12 @@ public class Vector3d {
 	@Configurable
 	private double z;
 
+	public Vector3d(double a) {
+		this.x = a;
+		this.y = a;
+		this.z = a;
+	}
+	
 	public Vector3d(double x, double y, double z) {
 		this.x = x;
 		this.y = y;

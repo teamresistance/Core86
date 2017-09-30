@@ -19,6 +19,13 @@ import javax.json.JsonReader;
 import javax.json.JsonValue;
 import javax.json.JsonValue.ValueType;
 
+
+/**
+ * Loads a JSON configuration file and fills out data in classes with that information.
+ * 
+ * @author Frank McCoy
+ *
+ */
 public class Configuration {
 
 	private JsonObject data;
@@ -29,6 +36,14 @@ public class Configuration {
 		data = read(path);
 	}
 	
+	/**
+	 * Instantiates and fills out an instance of type with the information stored in the JSON Object named <code>token</code>.
+	 * 
+	 * @param <T> the type to be instantiated and filled out 
+	 * @param type the type to be instantiated and filled out
+	 * @param token the name of the JSON object which data should be read from
+	 * @return a new instance of Type <code>type</code> with the data from the JSON object named <code>token</code>
+	 */
 	public <T> T get(Class<T> type, String token) {
 		if(!type.isAnnotationPresent(Configurable.class)) {
 			logger.log(Level.SEVERE, "Attempted to configure class which is not Configurable");
@@ -64,7 +79,7 @@ public class Configuration {
 		return t;
 	}
 	
-	/*
+	/**
 	 * Reads configuration data from JSON file
 	 */
 	private JsonObject read(String path) {
@@ -80,7 +95,7 @@ public class Configuration {
 		return result;
 	}
 	
-	/*
+	/**
 	 * Recursively loads data into an Object from a given JsonObject.
 	 */
 	private <T> void parseJsonObject(Class<T> type, Object instance, JsonObject json) {
@@ -108,7 +123,7 @@ public class Configuration {
 		}
 	}
 	
-	/*
+	/**
 	 * Recursively loads data in an array from given JSON.
 	 */
 	private <T> void  fillArray(Class<T> componentType, Object array, JsonArray json) {

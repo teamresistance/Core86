@@ -2,6 +2,12 @@ package org.teamresistance.core.mathd;
 
 import org.teamresistance.core.configuration.Configurable;
 
+/**
+ * Representation of four dimensional Vector
+ * 
+ * @author Frank McCoy
+ *
+ */
 @Configurable
 public class Vector4d {
 	@Configurable
@@ -13,10 +19,18 @@ public class Vector4d {
 	@Configurable
 	private double w;
 
+	public Vector4d(double a) {
+		this.x = a;
+		this.y = a;
+		this.z = a;
+		this.w = a;
+	}
+	
 	public Vector4d(double x, double y, double z, double w) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
+		this.w = w;
 	}
 
 	public Vector4d(Vector3d xyz, double w) {
