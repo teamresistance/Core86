@@ -7,61 +7,61 @@ import edu.wpi.first.wpilibj.tables.ITable;
 
 @Configurable
 public class Rectangle implements LiveWindowSendable {
-	
-	private ITable table;
 
-	@Configurable
-	public Vector2d position;
-	@Configurable
-	public Vector2d size;
-	
-	public Rectangle(double positionX, double positionY, double sizeX, double sizeY) {
-		this(new Vector2d(positionX, positionY), new Vector2d(sizeX, sizeY));
-	}
-	
-	public Rectangle(Vector2d position, Vector2d size) {
-		this.position = position;
-		this.size = size;
-	}
-	
-	public Vector2d getCenter() {
-		return position.add(size.div(2.0));
-	}
+    private ITable table;
 
-	@Override
-	public void initTable(ITable subtable) {
-		table = subtable;
-		updateTable();
-	}
+    @Configurable
+    public Vector2d position;
+    @Configurable
+    public Vector2d size;
 
-	@Override
-	public ITable getTable() {
-		return table;
-	}
+    public Rectangle(double positionX, double positionY, double sizeX, double sizeY) {
+        this(new Vector2d(positionX, positionY), new Vector2d(sizeX, sizeY));
+    }
 
-	@Override
-	public String getSmartDashboardType() {
-		return "Rectangle";
-	}
+    public Rectangle(Vector2d position, Vector2d size) {
+        this.position = position;
+        this.size = size;
+    }
 
-	@Override
-	public void updateTable() {
-		ITable positionTable = table.getSubTable("Position");
-		positionTable.putString("~TYPE~", position.getSmartDashboardType());
-		position.initTable(positionTable);
-		
-		ITable sizeTable = table.getSubTable("Size");
-		sizeTable.putString("~TYPE~", position.getSmartDashboardType());
-		size.initTable(sizeTable);
-	}
+    public Vector2d getCenter() {
+        return position.add(size.div(2.0));
+    }
 
-	@Override
-	public void startLiveWindowMode() {
-		
-	}
+    @Override
+    public void initTable(ITable subtable) {
+        table = subtable;
+        updateTable();
+    }
 
-	@Override
-	public void stopLiveWindowMode() {
-		
-	}
+    @Override
+    public ITable getTable() {
+        return table;
+    }
+
+    @Override
+    public String getSmartDashboardType() {
+        return "Rectangle";
+    }
+
+    @Override
+    public void updateTable() {
+        ITable positionTable = table.getSubTable("Position");
+        positionTable.putString("~TYPE~", position.getSmartDashboardType());
+        position.initTable(positionTable);
+
+        ITable sizeTable = table.getSubTable("Size");
+        sizeTable.putString("~TYPE~", position.getSmartDashboardType());
+        size.initTable(sizeTable);
+    }
+
+    @Override
+    public void startLiveWindowMode() {
+
+    }
+
+    @Override
+    public void stopLiveWindowMode() {
+
+    }
 }
