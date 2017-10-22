@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import java.util.logging.StreamHandler;
 import java.util.logging.XMLFormatter;
 
+import org.teamresistance.core.configuration.Configuration;
 import org.teamresistance.core.subsystem.IUpdatable;
 import org.teamresistance.core.util.Time;
 import org.teamresistance.core.util.Util;
@@ -35,7 +36,7 @@ public class Robot extends RobotBase {
         // Initialize log file when class is loaded
         initLogger();
     }
-
+    
     /**
      * Currently running instance of Robot.
      */
@@ -78,12 +79,17 @@ public class Robot extends RobotBase {
     private boolean teleopInitialized;
     private boolean testInitialized;
 
+    protected static final String CONFIG_FILE = ".teamresistance/config.json";
+    protected Configuration configuration;
+    
     public Robot() {
         instance = this;
         autonomousInitialized = false;
         disabledInitialized = false;
         teleopInitialized = false;
         testInitialized = false;
+        
+        configuration = new Configuration(CONFIG_FILE);
     }
 
     @Override
@@ -311,6 +317,14 @@ public class Robot extends RobotBase {
      */
     public static Robot getInstance() {
         return instance;
+    }
+    
+    public Configuration getConfiguratin() {
+        return configuration;
+    }
+    
+    public static Configuration getConfiguration() {
+        return Robot.getInstance().getConfiguratin();
     }
     
     public static void registerRobot(Class<?> robot) {
