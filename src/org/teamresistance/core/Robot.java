@@ -67,6 +67,12 @@ public class Robot extends RobotBase {
      */
     protected IUpdatable test;
 
+    private static Class<?> robotClass;
+    private static Class<?> autonomousClass;
+    private static Class<?> disabledClass;
+    private static Class<?> teleopClass;
+    private static Class<?> testClass;
+    
     private boolean autonomousInitialized;
     private boolean disabledInitialized;
     private boolean teleopInitialized;
@@ -114,8 +120,18 @@ public class Robot extends RobotBase {
      * functions.
      */
     private void init() {
-        if (robot != null)
-            robot.init();
+        if (robot == null) {
+            if(robotClass != null) {
+                try {
+                    robot = (IUpdatable)robotClass.newInstance();
+                } catch (InstantiationException | IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                return;
+            }
+        } 
+        robot.init();
     }
 
     /**
@@ -136,6 +152,13 @@ public class Robot extends RobotBase {
     private void teleopUpdate() {
         HAL.observeUserProgramTeleop();
         update();
+        if(teleop == null && teleopClass != null) {
+            try {
+                teleop = (IUpdatable)teleopClass.newInstance();
+            } catch (InstantiationException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
         if (teleop != null) {
             // call teleop.init() if this is the first time
             // we've entered teleop_mode
@@ -164,6 +187,15 @@ public class Robot extends RobotBase {
     private void autonomousUpdate() {
         HAL.observeUserProgramAutonomous();
         update();
+        
+        if(autonomous == null && autonomousClass != null) {
+            try {
+                autonomous = (IUpdatable)autonomousClass.newInstance();
+            } catch (InstantiationException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        
         if (autonomous != null) {
             // call autonomous.init() if this is the first time
             // we've entered autonomous_mode
@@ -192,6 +224,15 @@ public class Robot extends RobotBase {
     private void disabledUpdate() {
         HAL.observeUserProgramDisabled();
         update();
+        
+        if(disabled == null && disabledClass != null) {
+            try {
+                disabled = (IUpdatable)disabledClass.newInstance();
+            } catch (InstantiationException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        
         if (disabled != null) {
             // call disabled.init() if we are now just entering disabled mode from
             // either a different mode or from power-on
@@ -220,6 +261,15 @@ public class Robot extends RobotBase {
     private void testUpdate() {
         HAL.observeUserProgramTest();
         update();
+        
+        if(test == null && testClass != null) {
+            try {
+                test = (IUpdatable)testClass.newInstance();
+            } catch (InstantiationException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        
         if (test != null) {
             // call test.init() if we are now just entering test mode from either
             // a different mode or from power-on
@@ -262,7 +312,27 @@ public class Robot extends RobotBase {
     public static Robot getInstance() {
         return instance;
     }
+    
+    public static void registerRobot(Class<?> robot) {
+        robotClass = robot;
+    }
+    
+    public static void registerAutonomous(Class<?> autonomous) {
+        autonomousClass = autonomous;
+    }
+    
+    public static void registerTeleop(Class<?> teleop) {
+        teleopClass = teleop;
+    }
 
+    public static void registerDisabled(Class<?> disabled) {
+        disabledClass = disabled;
+    }
+    
+    public static void registerTest(Class<?> test) {
+        testClass = test;
+    }
+    
     /**
      * Returns the user-defined {@link IUpdatable} which handles robot specific
      * global initialization and updating.
