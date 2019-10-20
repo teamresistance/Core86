@@ -1,2 +1,3 @@
 # Core86
-Team Resistance core library
+Team Resistance overall framework and core library
+
