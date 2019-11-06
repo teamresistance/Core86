@@ -1,5 +1,7 @@
 //Subsystems are the seperate files that program seperate parts for the bot
-//A subsystem without a switch statement (state machine) is usually a simple check if the button is pressed to activate a motor
+
+//A subsystem with a switch statement (state machine) is more useful for arms or anything that has multiple positions
+//it needs to be in.
 
 package frc.robot;
 
@@ -10,10 +12,10 @@ import edu.wpi.first.wpilibj.Talon;
 //look there for explanations of init and update
 import frc.util.Updatable;
 
-public class Subsystem implements Updatable {
+public class StateSubsystem implements Updatable {
 
     // An example motor used for this subsystem, any motors and sensors used go here
-    private Talon subsystemTalon;
+    private Talon stateSubsystemTalon;
 
     // Any instance variables that define key parts of the subsystem (speed, any
     // checkers) go here
@@ -23,7 +25,7 @@ public class Subsystem implements Updatable {
 
     // The constructor of a Subsystem takes in whatever motors and sensors that the
     // subsystem uses and...
-    public Subsystem(Talon eSubsystemTalon) {
+    public StateSubsystem(Talon eStateSubsystemTalon) {
         // ...takes the inputs and uses them to define the motor and sensor instance
         // variables
         subsystemTalon = eSubsystemTalon;
